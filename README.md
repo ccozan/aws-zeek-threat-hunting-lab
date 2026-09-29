@@ -8,6 +8,45 @@ The primary investigation focused on identifying **suspicious HTTP activity and 
 
 ---
 
+## 🔎 SOC Investigation
+
+### Potential HTTP Beaconing Investigation
+
+As part of this lab, I conducted a SOC-style investigation of a **Potential HTTP Beaconing** detection using Splunk and Zeek network telemetry.
+
+The investigation followed an **alert → triage → investigation → conclusion** workflow and included:
+
+- Establishing the suspicious communication timeline
+- Analyzing `conn.log`, `http.log`, and `files.log`
+- Identifying approximately **30-second periodic communication**
+- Investigating **2,882 HTTP events**
+- Analyzing repeated `text/plain` file transfers
+- Correlating **8,647 events** across multiple Zeek data sources
+- Collecting investigation artifacts and network indicators
+- Mapping observed behavior to MITRE ATT&CK
+- Writing an analyst conclusion and recommended response actions
+
+### Key Findings
+
+| Finding | Result |
+|---|---|
+| Source IP | `192.168.99.53` |
+| Destination IP | `67.207.93.135` |
+| Destination Port | `80/TCP` |
+| HTTP Events | 2,882 |
+| Average Beacon Interval | ~29.98 seconds |
+| File Events | 2,882 |
+| Repeated Transfer Size | 226,132 bytes |
+| Cross-Log Events | 8,647 |
+
+> The observed network behavior was suspicious and consistent with automated beaconing patterns. Network telemetry alone was not treated as sufficient evidence to conclusively identify malware or command-and-control activity.
+
+### 📄 Full Investigation
+
+➡️ **[View the complete Potential HTTP Beaconing SOC Investigation](investigations/potential-http-beaconing.md)**
+
+The full investigation includes Splunk evidence, Zeek telemetry analysis, investigation artifacts, MITRE ATT&CK mapping, analyst conclusions, and recommended response actions.
+
 ## Objectives
 
 - Build an AWS-based environment for security monitoring and threat hunting
